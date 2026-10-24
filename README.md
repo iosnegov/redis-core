@@ -4,6 +4,25 @@
 
 [^1]: Redis offers a rich set of features (e.g. data structures, pub/sub, streams, Lua scripting). However, this project focuses on its original and most common use case: a fast, simple, and reliable cache. While Redis can do much more, here I intentionally limit the implementation to classic key-value caching to keep the example clear, educational, and aligned with Redis’s core purpose.
 
+> [!WARNING]  
+> **Project Archived**
+> 
+> This project is no longer actively maintained. 
+> 
+> **Context:**  
+> Originally, this repository began as a modular component of a large-scale university assignment. Rather than simply completing the task and discarding the code, I chose to expand it into a structured mini-project to deeply explore how to work with Redis in practice. Over time, however, I decided to consolidate all the modular knowledge I gained in web technologies into a single, unified educational project. Maintaining "perfect educational code" for Redis across multiple separate repositories became inefficient and fragmented.
+> 
+> **Reason for Archiving:**  
+> Consequently, I made the decision to archive this standalone project to consolidate and maintain the highest quality, up-to-date code in a single location. 
+> 
+> This repository remains available purely as an educational reference for those interested in a foundational understanding of how to work with Redis in practice. For the most up-to-date and comprehensive implementation, please refer to my main unified project:
+> 
+> - [Pose Estimation Service](https://github.com/snegoviol/pose-estimation-service)
+> 
+> Additionally, you can explore further examples of my architecture and development approach in these repositories:
+> - [Backend Core](https://github.com/snegoviol/backend-core)
+> - [Fullstack Core](https://github.com/snegoviol/fullstack-core)
+
 ## Project Structure
 
 ```
