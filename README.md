@@ -1,12 +1,12 @@
-# **Redis Core**
+# Redis Core
 
 *An educational project showcasing how to use Redis with Python, covering both synchronous and asynchronous approaches.* [^1]
 
 [^1]: Redis offers a rich set of features (e.g. data structures, pub/sub, streams, Lua scripting). However, this project focuses on its original and most common use case: a fast, simple, and reliable cache. While Redis can do much more, here I intentionally limit the implementation to classic key-value caching to keep the example clear, educational, and aligned with Redis’s core purpose.
 
-## **Project Structure**
+## Project Structure
 
-```bash
+```
 redis-core/
 ├── app/                   # Main application code
 ├── docker-composes/       # Docker Compose configurations for Redis servers
@@ -19,61 +19,57 @@ redis-core/
 
 Each directory includes its own `README.md` with detailed information about its contents and usage, and every file contains comprehensive inline comments to explain the code.
 
-## **Dependencies Overview**
+## Dependencies Overview
 
-- [pydantic-settings](https://github.com/pydantic/pydantic-settings) — 
-a Pydantic-powered library for managing application configuration and environment variables with strong typing, validation, and seamless `.env` support.
+| Dependency | Repository | What it is |
+| :--- | :--- | :--- |
+| **CPython** | [python/cpython](https://github.com/python/cpython) | The de facto standard implementation of the Python programming language. |
+| **pydantic-settings** | [pydantic/pydantic-settings](https://github.com/pydantic/pydantic-settings) | Pydantic-powered library for managing application configuration and environment variables with strong typing, validation, and seamless `.env` support. |
+| **redis-py** | [redis/redis-py](https://github.com/redis/redis-py) | The official Python client for Redis, used here for synchronous and asynchronous caching operations. [^2] |
+| **just** | [casey/just](https://github.com/casey/just) | Lightweight, cross-platform command runner that replaces complex shell scripts with clean, readable recipes, and natively loads environment variables directly from `.env` files out of the box (unlike `pixi tasks`). |
+| **JupyterLab** *(Dev)* | [jupyterlab/jupyterlab](https://github.com/jupyterlab/jupyterlab) | Next-generation web-based interactive development environment for Jupyter notebooks; used here to create interactive documents for testing and verifying code execution. |
 
-- [redis-py](https://github.com/redis/redis-py) — 
-the official Python client for Redis, used here for synchronous and asynchronous caching operations. [^2]
+[^2]: I use `redis-py` directly instead of higher-level libraries like `redis-om` because this project focuses solely on simple key-value caching, and advanced features are unnecessary for this use case.
 
-[^2]: I use `redis-py` directly instead of higher-level libraries like `redis-om` because this project focuses solely on simple key-value caching and advanced features are unnecessary for this use case.
+## Quick Start
 
-- [just](https://github.com/casey/just) — 
-a lightweight, cross-platform command runner that replaces complex shell scripts with clean, readable, and reusable project-specific recipes. [^3]
+### I. Prerequisites
 
-[^3]: Despite using `pixi`, there are issues with `pixi tasks` regarding environment variable handling from `.env` files and caching mechanism that is unclear and causes numerous errors. In contrast, `just` provides predictable, transparent execution without the complications encountered with `pixi tasks` system. I truly hope `pixi tasks` have been improved by the time you’re reading this! <33
+| Component | Requirement |
+| :--- | :--- |
+| **Operating System** | GNU/Linux-based system |
+| **Architecture** | `x86_64` |
+| **Package Manager** | [`Pixi`](https://pixi.prefix.dev/latest/) |
+| **Container Tools** | [Docker and Docker Compose](https://docs.docker.com/engine/install/) |
 
-### **Testing & Development Dependencies**
+> **Note:**  
+> These are not strict requirements, but rather the baseline environment where the code is 
+> guaranteed to run out of the box. Alternative setups are possible but may require manual 
+> configuration.
 
-- [JupyterLab](https://github.com/jupyterlab/jupyterlab) — 
-a next-generation web-based interactive development environment for Jupyter notebooks; used here to create interactive documents for testing and verifying code execution.
-
-## **Quick Start**
-
-### **I. Prerequisites**
-
-- [Docker and Docker Compose](https://docs.docker.com/engine/install/) container tools.
-- [Pixi](https://pixi.sh/latest/) package manager.
-
-> **Platform note**: All development and testing were performed on `linux-64`.  
-> If you're using a different platform, you’ll need to:
-> 1. Update the `platforms` list in the `pixi.toml` accordingly.
-> 2. Ensure that platform-specific scripts (e.g., `.sh` files) are compatible with your operating system or replace them with equivalents.
-
-### **II. Environment Setup**
+### II. Environment Setup
 
 1. **Clone the repository**
 
     ```bash
-    git clone git@github.com:Sierra-Arn/redis-core.git
+    git clone https://github.com/snegoviol/redis-core.git
     cd redis-core
     ```
 
 2. **Install dependencies**
-    
+
     ```bash
     pixi install --all
     ```
 
-3. **Activate pixi environment**
-    
+3. **Activate Pixi environment**
+
     ```bash
     pixi shell
     ```
 
 4. **Setup environment configuration**
-    
+
     ```bash
     just copy-env
     just make-x
@@ -86,9 +82,9 @@ a next-generation web-based interactive development environment for Jupyter note
     just redis-up 2
     ```
 
-### **III. Testing**
+### III. Testing
 
-Once a database is ready, you can run and test the Redis implementation with interactive Jupyter notebooks in `playground-testing/`:
+Once the database is ready, you can run and test the Redis implementation with interactive Jupyter notebooks in `playground-testing/`:
 
 1. **Launch JupyterLab**
 
@@ -102,18 +98,18 @@ Once a database is ready, you can run and test the Redis implementation with int
     - Open and execute the notebooks interactively.
 
 3. **(Optional) Verify database manually**  
-You can open a Redis shell to manually verify that everything is working correctly:
+    You can open a Redis shell to manually verify that everything is working correctly:
 
     ```bash
     just redis-shell 2
     ```
 
-### **IV. Cleanup**
+### IV. Cleanup
 
 When you finish testing:
 
 1. **Stop JupyterLab**  
-   In the terminal where JupyterLab is running, press `Ctrl+C` to shut it down.
+    In the terminal where JupyterLab is running, press `Ctrl+C` to shut it down.
 
 2. **Stop Redis**
 
@@ -121,6 +117,6 @@ When you finish testing:
     just redis-down 2
     ```
 
-## **License**
+## License
 
-This project is licensed under the [BSD-3-Clause License](LICENSE).
+Each file in this repository is licensed under the [MIT No Attribution License](LICENSE.txt).

@@ -1,8 +1,8 @@
-# **Application Structure**
+# Application Structure
 
 *This README provides a high-level architectural overview of the project: what each component is for and why it exists. For implementation details refer to the docstrings and comments inside each file.*
 
-## **I. `db/` — The Data Layer**
+## I. `db/` — The Data Layer
 
 1. **`config.py`**  
     Provides Redis configuration singleton built with Pydantic, loaded from `.env` with strict validation.
@@ -19,7 +19,7 @@
 5. **`services/`**  
     Provides mock implementations that demonstrate use of decorators across both synchronous and asynchronous code.
 
-## **II. `initialization/` — Bootstrapping Redis**
+## II. `initialization/` — Bootstrapping Redis
 
 1. **`01-create-users.acl`**  
     Defines multiple Redis users and assigns minimal necessary permissions to each, following the principle of least privilege.

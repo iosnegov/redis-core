@@ -1,14 +1,14 @@
-# **Redis ACL Configuration**
+# Redis ACL Configuration
 
 This section defines a role-based access control (RBAC) model for Redis, using dedicated users with minimal, purpose-driven permissions.
 
-## **I. Administrative User**
+## I. Administrative User
 
 ```bash
 user ${REDIS_ADMIN_NAME} on >${REDIS_ADMIN_PASSWORD} ~* &* +@all
 ```
 
-### **Assigned permissions**
+### Assigned permissions
 
 - **`~*`**  
     Full access to all keyspaces, enabling management of any data stored in Redis.
@@ -17,17 +17,17 @@ user ${REDIS_ADMIN_NAME} on >${REDIS_ADMIN_PASSWORD} ~* &* +@all
 - **`+@all`**  
     Grants execution rights to every Redis command category, including administrative and dangerous operations.
 
-### **Role purpose**
+### Role purpose
 
 Provides full administrative control over the Redis instance.
 
-## **II. Caching User**
+## II. Caching User
 
 ```bash
 user ${REDIS_USER_NAME} on >${REDIS_USER_PASSWORD} ~* +get +set +del +exists +expire +pexpire +ttl +pttl +mget +mset +setex
 ```
 
-### **Assigned permissions**
+### Assigned permissions
 
 - **`~*`**  
     Grants access to all keys in the Redis instance across all database indexes. [^1]  
@@ -67,17 +67,17 @@ user ${REDIS_USER_NAME} on >${REDIS_USER_PASSWORD} ~* +get +set +del +exists +ex
 - **`+setex`**  
     Sets a key with a value and a TTL in seconds in a single atomic command. Combines `set` and `expire` for convenience and performance.
 
-### **Role purpose**
+### Role purpose
 
 This user is designed exclusively for caching operations, with no access to administrative, dangerous, or non-caching-related commands. It follows the **principle of least privilege**, ensuring security while supporting all standard read/write/expire patterns.
 
-## **III. Security: Disable the default user**
+## III. Security: Disable the default user
 
 ```bash
 user default off nopass
 ```
 
-### **Historical Context and Evolution**
+### Historical Context and Evolution
 
 **Redis < 6.0 (Legacy Era)**  
 - No user or access control system existed.
@@ -100,7 +100,7 @@ user default off nopass
 - Explicitly disable the `default` user in all production environments.
 - Create dedicated named users with least-privilege permissions tailored to each application’s needs.
 
-# **Critical ACL File Limitations**
+# Critical ACL File Limitations
 
 1. **No Environment Variables**  
 Redis ACL files cannot interpolate environment variables like `${REDIS_ADMIN_NAME}` — they are read literally.

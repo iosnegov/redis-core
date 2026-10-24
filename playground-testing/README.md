@@ -1,4 +1,4 @@
-# **Testing and Exploration**
+# Testing and Exploration
 
 Two Jupyter notebooks are provided for interactive experimentation with Redis: one for synchronous workflows, another for asynchronous patterns.
 
